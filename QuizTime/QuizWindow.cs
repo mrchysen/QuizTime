@@ -34,7 +34,7 @@ namespace QuizTime
 
         // Методы \\ 
         /// <summary>
-        /// Метод конфигурации окна 
+        /// Метод конфигурации окна и элементов на нём
         /// </summary>
         private void PrepareWindow()
         {
@@ -52,23 +52,41 @@ namespace QuizTime
             panel1.BackColor = Color.FromArgb(191, 231, 245);
         }
 
+        /// <summary>
+        /// Подготавливает форму к новому вопросу
+        /// </summary>
+        /// <param name="q"></param>
         private void SetQuestion(Question q)
         {
             label1.Text = q.GetText;
 
             if(q is MultiQuestion mq) 
             {
+                PanelYesNo.Visible = false;
+                comboBox1.Visible = true;
+                SimpleButton1.Size = new Size(208,48);
+                SimpleButton1.Location = new Point(370, 394);
+                SimpleButton2.Visible = true;
+
                 for (int i = 0; i < mq.GetAllAnswers.Count; i++)
                 {
                     comboBox1.Items.Add(mq.GetAllAnswers[i]);
                 }
+                comboBox1.SelectedIndex = 0;
             }
             else
             {
-                comboBox1.Items.Add("Да");
-                comboBox1.Items.Add("Нет");
+                PanelYesNo.Visible = true;
+                comboBox1.Visible = false;
+                SimpleButton1.Size = new Size(568, 48);
+                SimpleButton1.Location = new Point(10, 394);
+                SimpleButton2.Visible = false;
+
+
             }
-            comboBox1.SelectedIndex = 0;
+            
+
+            
         }
 
         // Методы для обычных кнопок (меняют цвет) 
@@ -94,18 +112,44 @@ namespace QuizTime
             DialogResult = DialogResult.Cancel;  
             Close();
         }
-        // Кнопка Следующий вопрос
+
+        // Кнопка Принять ответ [Логика: проверить + след. вопрос]
         private void SimpleButton2_Click(object sender, EventArgs e)
         {
             int ChosenAnswer = comboBox1.SelectedIndex + 1;
+
             if (QH[index].Quiz(ChosenAnswer)) 
             {
                 RightAnswer++;
             }
 
+            NextQuestion();
+        }
 
+        //Кнопка Да [Логика: проверка + след. вопрос]
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (QH[index].Quiz(1)) RightAnswer++;
+            
+            NextQuestion();
+        }
+
+        //Кнопка Нет [Логика: проверка + след. вопрос]
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (QH[index].Quiz(2)) RightAnswer++;
+
+            NextQuestion();
+        }
+
+        /// <summary>
+        /// Метод перехода к следующему вопросу
+        /// </summary>
+        private void NextQuestion()
+        {
             index++;
-            if(index < QH.Length) 
+
+            if (index < QH.Length)
             {
                 comboBox1.Items.Clear();
                 SetQuestion(QH[index]);

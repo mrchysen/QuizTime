@@ -29,7 +29,7 @@ namespace QuizTime
 
         // Методы \\ 
         /// <summary>
-        /// Метод конфигурации окна 
+        /// Метод конфигурации окна и элементов на нём
         /// </summary>
         private void PrepareWindow()
         {

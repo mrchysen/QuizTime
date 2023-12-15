@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -25,12 +26,12 @@ namespace QuizTime
             InitializeComponent();
             PrepareWindow();
 
-            PathToDirectoryWithFiles = "C:\\Users\\kokos\\OneDrive\\Рабочий стол\\p";
+            PathToDirectoryWithFiles = Directory.GetCurrentDirectory() + "\\Questions";
         }
 
         // Методы \\ 
         /// <summary>
-        /// Метод конфигурации окна 
+        /// Метод конфигурации окна и элементов на нём
         /// </summary>
         private void PrepareWindow()
         {
@@ -142,5 +143,7 @@ namespace QuizTime
             QuizWindow QW = new QuizWindow(Qhandler);
             QW.ShowDialog();
         }
+
+        
     }
 }

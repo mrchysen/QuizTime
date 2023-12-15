@@ -51,13 +51,25 @@ namespace LogicOfApplication
             {
                 return (Answer == InputAnswer - 1);
             }
+            /// <summary>
+            /// Метод сохранения в текстовый файл
+            /// </summary>
+            /// <param name="Sw"></param>
+            public virtual void SaveIntoTxtFile(StreamWriter Sw)
+            {
+                Sw.WriteLine(QuestionText);
+                Sw.WriteLine($"Сложность:{Dificulty}");
+                string ans = (Answer == 0) ? "Да" : "Нет";
+                Sw.WriteLine(ans);
+            }
             public override string ToString()
             {
                 return GetText + "(1 Да/2 Нет)";
             }
+            
         }
 
-        // Вопросы с множественным ответом\\
+        // Вопросы с множественным ответом
         public class MultiQuestion : Question
         {
             // Поля \\
@@ -88,6 +100,22 @@ namespace LogicOfApplication
             public override bool Quiz(int InputAnswer)
             {
                 return (Answer == InputAnswer - 1);
+            }
+
+            /// <summary>
+            /// Метод сохранения в текстовый файл
+            /// </summary>
+            /// <param name="Sw"></param>
+            public override void SaveIntoTxtFile(StreamWriter Sw)
+            {
+                Sw.WriteLine(QuestionText);
+                Sw.WriteLine($"Сложность:{Dificulty}");
+                for (int i = 0; i < Answers.Count; i++)
+                {
+                    string Remark = (i == Answer) ? Answers[i] + "(*)" : Answers[i];
+                    Sw.WriteLine(Remark);
+                }
+                
             }
 
             public override string ToString()
@@ -126,7 +154,7 @@ namespace LogicOfApplication
                     {
                         output += $"{i + 1}) " + Questions[i].GetText + $" (Сложность {Questions[i].GetDificulty})" + '\n';
                     }
-                    output += $"{Length}) " + Questions[Length - 1].GetText + $" {Questions[Length - 1].GetDificulty}";
+                    output += $"{Length}) " + Questions[Length - 1].GetText + $" (Сложность {Questions[Length - 1].GetDificulty})";
                     return output;
                 }
             }
@@ -221,6 +249,9 @@ namespace LogicOfApplication
                     Questions[index] = temp;
                 }
             }
+            /// <summary>
+            /// Сортирует вопросы(в данном случае по сложности)
+            /// </summary>
             public void SortForDificult() => Sort.Invoke();
             /// <summary>
             /// Считывает вопросы из файла по пути PathToFile
@@ -283,6 +314,37 @@ namespace LogicOfApplication
                 }
                 return true;
             }
+
+            /// <summary>
+            /// Сохраняет данный контейнер вопросов в созданный файл по пути PathToDirectory с названием FileName 
+            /// </summary>
+            /// <param name="PathToFile"></param>
+            /// <param name="FileName"></param>
+            /// <returns></returns>
+            public bool SaveToFile(string PathToDirectory, string FileName) 
+            {
+                // Если вопросов нет, то и сохранять нечего
+                if (Length == 0) return false;
+
+                // Если существует файл с заданным именем, то возвращаем false
+                if (File.Exists(PathToDirectory + $"\\{FileName}.txt")) 
+                {
+                    return false;
+                }
+                else
+                {
+                    StreamWriter Sw = File.CreateText(PathToDirectory + $"\\{FileName}.txt");
+
+                    for (int i = 0; i < Length; i++)
+                    {
+                        this[i].SaveIntoTxtFile(Sw);
+                        Sw.WriteLine("---");
+                    }
+
+                    Sw.Close();
+                }
+                return true;
+            }
         }
 
     }
@@ -290,10 +352,67 @@ namespace LogicOfApplication
     // Тут вспомогательнее классы для коректной работы форм
     namespace Managers
     {
+        /// <summary>
+        /// Класс-Конфигурации пока что бесполезен :(
+        /// </summary>
+        class Configuration
+        {
+            // Поля \\
+            protected string PathToWithQuestions;
+            protected string CurentDirectory;
+
+            // Св-ва \\
+            public string GetPathToWithQuestions => CurentDirectory + PathToWithQuestions;
+
+            // Конструкторы \\
+            public Configuration() 
+            {
+                CurentDirectory = Directory.GetCurrentDirectory();
+            }
+
+            // Методы \\
+            /// <summary>
+            /// Считывает конфигурацию из файла
+            /// </summary>
+            /// <param name="path"></param>
+            /// <returns></returns>
+            public bool LoadConfigFromFile(string path)
+            {
+                if (File.Exists(path))
+                {
+                    using (StreamReader sr = new StreamReader(path))
+                    {
+                        PathToWithQuestions =  "\\" + sr.ReadLine();
+                    }
+                    return true;
+                }
+                return false;
+            }
+            /// <summary>
+            /// Сохраняет конфигурацию в файл
+            /// </summary>
+            /// <param name="path"></param>
+            /// <returns></returns>
+            public void SaveConfigToFile(string path) 
+            {
+                StreamWriter sw;
+
+                if (File.Exists(path))
+                {
+                    sw = new StreamWriter(path);
+                }
+                else
+                {
+                    sw = File.CreateText(path);
+                }
+
+                sw.WriteLine($"PathToDirectory:{PathToWithQuestions}");
+            }
+        }
+
         // Класс, управляющий файлами приложения
         public class FilesManager
         {
-
             // Поля \\
             private string PathOfDirectory; // Путь к папке со всеми файлами вопросов
             private List<string> FilesNames = new List<string>();

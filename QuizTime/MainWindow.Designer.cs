@@ -51,9 +51,8 @@
             this.gradientPanel1.Controls.Add(this.TopPanel);
             this.gradientPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gradientPanel1.Location = new System.Drawing.Point(0, 0);
-            this.gradientPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.gradientPanel1.Name = "gradientPanel1";
-            this.gradientPanel1.Size = new System.Drawing.Size(645, 814);
+            this.gradientPanel1.Size = new System.Drawing.Size(484, 661);
             this.gradientPanel1.TabIndex = 0;
             // 
             // SimpleButton3
@@ -61,10 +60,9 @@
             this.SimpleButton3.BackColor = System.Drawing.Color.Green;
             this.SimpleButton3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SimpleButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.SimpleButton3.Location = new System.Drawing.Point(16, 199);
-            this.SimpleButton3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SimpleButton3.Location = new System.Drawing.Point(12, 162);
             this.SimpleButton3.Name = "SimpleButton3";
-            this.SimpleButton3.Size = new System.Drawing.Size(613, 59);
+            this.SimpleButton3.Size = new System.Drawing.Size(460, 48);
             this.SimpleButton3.TabIndex = 4;
             this.SimpleButton3.Text = "Провести тестирование";
             this.SimpleButton3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -77,10 +75,9 @@
             this.SimpleButton2.BackColor = System.Drawing.Color.Green;
             this.SimpleButton2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SimpleButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.SimpleButton2.Location = new System.Drawing.Point(16, 119);
-            this.SimpleButton2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SimpleButton2.Location = new System.Drawing.Point(12, 97);
             this.SimpleButton2.Name = "SimpleButton2";
-            this.SimpleButton2.Size = new System.Drawing.Size(613, 59);
+            this.SimpleButton2.Size = new System.Drawing.Size(460, 48);
             this.SimpleButton2.TabIndex = 3;
             this.SimpleButton2.Text = "Посмотреть вопросы";
             this.SimpleButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -93,10 +90,9 @@
             this.SimpleButton1.BackColor = System.Drawing.Color.Green;
             this.SimpleButton1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SimpleButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.SimpleButton1.Location = new System.Drawing.Point(16, 39);
-            this.SimpleButton1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SimpleButton1.Location = new System.Drawing.Point(12, 32);
             this.SimpleButton1.Name = "SimpleButton1";
-            this.SimpleButton1.Size = new System.Drawing.Size(613, 59);
+            this.SimpleButton1.Size = new System.Drawing.Size(460, 48);
             this.SimpleButton1.TabIndex = 2;
             this.SimpleButton1.Text = "Подключить файл";
             this.SimpleButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -109,10 +105,9 @@
             this.ExitButton.BackColor = System.Drawing.Color.Green;
             this.ExitButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.ExitButton.Location = new System.Drawing.Point(16, 743);
-            this.ExitButton.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ExitButton.Location = new System.Drawing.Point(12, 604);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(613, 59);
+            this.ExitButton.Size = new System.Drawing.Size(460, 48);
             this.ExitButton.TabIndex = 1;
             this.ExitButton.Text = "Выход";
             this.ExitButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -127,9 +122,8 @@
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(645, 28);
+            this.TopPanel.Size = new System.Drawing.Size(484, 23);
             this.TopPanel.TabIndex = 0;
             this.TopPanel.Text = "QuizTime v 2.0 [Файл не подключён]";
             this.TopPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Window_MouseDown);
@@ -137,11 +131,10 @@
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 814);
+            this.ClientSize = new System.Drawing.Size(484, 661);
             this.Controls.Add(this.gradientPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainWindow";
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.MainWindow_Shown);
